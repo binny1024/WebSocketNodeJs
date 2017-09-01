@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>WebSocket Echo Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script type="text/javascript">
+        var ws = new WebSocket("ws://localhost:8181/");
+        ws.onopen = function (e) {
+            console.log('Connection to server opened');
+        };
+        ws.onmessage = function (msg) {
+            console.log(msg.data);
+            document.getElementById("recv").innerHTML = msg.data;
+        };
+        function sendMessage() {
+            var txt = document.getElementById("sendTxt").value;
+            ws.send(txt);
+        }
+    </script>
+</head>
+
+<body>
+<input id="sendTxt" type="text" title="ss"/>
+<button id="sendBtn" onclick="sendMessage()">Send</button>
+<div id="recv"></div>
+</body>
+</html>
